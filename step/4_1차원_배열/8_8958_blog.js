@@ -47,7 +47,7 @@ const checkPoint = (str) => {
       extraPoint = 0;
     }
   });
-
+ㅌ
   return result;
 };
 
