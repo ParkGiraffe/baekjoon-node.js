@@ -32,12 +32,12 @@ https://www.acmicpc.net/problem/10813
 */
 
 const fs = require("fs");
-const [MnN, ...exes] = fs
+const [NnM, ...exes] = fs
   .readFileSync("/dev/stdin")
   .toString()
   .trim()
   .split("\n");
-const [n, m] = MnN.split(" ").map((e) => +e);
+const [n, m] = NnM.split(" ").map((e) => +e);
 const baskets = new Array(n).fill().map((v, i) => i + 1);
 let result = "";
 
