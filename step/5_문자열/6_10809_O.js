@@ -21,14 +21,14 @@ baekjoon
 const fs = require("fs");
 const input = fs.readFileSync("/dev/stdin").toString().trim().split("");
 const alphabet = Array.from({ length: 26 }, (v, i) =>
-  String.fromCharCode(i + 97)
+  String.fromCharCode(i + 97) // <utf-16 table>  97 : a | 122 : z
 );
 
 let result = "";
 
 alphabet.forEach((e) => {
   let find = input.findIndex((c) => c === e);
-  find ? (result += `${find} `) : (result += "0 ");
+  result += find + ' ';
 });
 
 console.log(result);

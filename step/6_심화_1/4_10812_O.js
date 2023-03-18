@@ -33,27 +33,18 @@ https://www.acmicpc.net/problem/10812
 
 const fs = require("fs");
 
-const [MnN, ...exes] = fs
+const [NnM, ...exes] = fs
   .readFileSync("/dev/stdin")
   .toString()
   .trim()
   .split("\n");
-let restArr = [];
 
-const [n, m] = MnN.split(" ").map((e) => +e);
+const [n, m] = NnM.split(" ").map((e) => +e);
 let baskets = new Array(n).fill(0).map((v, i) => i + 1);
-let result = "";
-// console.log(baskets)
 
 const execute = (str) => {
   const [i, j, k] = str.split(" ").map((e) => +e - 1);
   const tempBaskets = [...baskets];
-  let beginCount = 0;
-  // console.log(tempBaskets);
-
-  // k를 기준으로
-  // 왼쪽으로 i번째 바구니
-  // j까지
 
   baskets = tempBaskets
     .slice(0, i)
@@ -62,5 +53,4 @@ const execute = (str) => {
 };
 
 exes.forEach(execute);
-baskets.forEach((e) => (result += `${e} `));
-console.log(result);
+console.log(baskets.join(' '));
