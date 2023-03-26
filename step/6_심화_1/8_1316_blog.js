@@ -63,10 +63,10 @@ const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
 const [amount, ...strings] = input;
 let result = 0;
 
-const isGroupWord = (str) => {
+const isGroupWord = (arr) => {
   let words = [];
   let isRight = true;
-  str.forEach((e) => {
+  arr.forEach((e) => {
     const isExist = words.find((c) => c == e);
     // console.log(isExist)
     if (isExist) {
