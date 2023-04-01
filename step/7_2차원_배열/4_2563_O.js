@@ -37,7 +37,6 @@ const length = 10;
 
 papers.forEach((e) => {
   const [x, y] = e.split(" ").map((e) => +e);
-  // console.log(x, y)
   for (let i = x; i < x + length; i++) {
     for (let j = y; j < y + length; j++) {
       whiteBoard[i][j] = true;

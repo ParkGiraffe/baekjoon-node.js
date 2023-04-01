@@ -68,7 +68,6 @@ const isGroupWord = (arr) => {
   let isRight = true;
   arr.forEach((e) => {
     const isExist = words.find((c) => c == e);
-    // console.log(isExist)
     if (isExist) {
       e !== words.pop() ? (isRight = false) : words.push(e); // <- 여기서 push를 안 하고 넘어겄더니 내가 찾은 반례에서 오답 발생.
     } else {
