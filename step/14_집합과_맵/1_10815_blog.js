@@ -21,7 +21,7 @@
 */
 
 /*
-시간초과
+Array로 문제를 풀면 시간초과
 const fs = require("fs");
 const input = fs.readFileSync("/dev/stdin").toString().trim().split('\n');
 const n = + input[0];
