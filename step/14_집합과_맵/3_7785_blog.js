@@ -62,10 +62,10 @@ console.log([...work].sort((a, b) => {
     if (!b[i]) return -1
     if (!a[i]) return 1
     
-    if (a[i].charCodeAt() - b[i].charCodeAt() > 0) {
+    if (a[i].charCodeAt() > b[i].charCodeAt()) {
       return -1;
         
-    } else if (a[i].charCodeAt() - b[i].charCodeAt() < 0) {
+    } else if (a[i].charCodeAt() < b[i].charCodeAt()) {
       return 1;
     }
     
