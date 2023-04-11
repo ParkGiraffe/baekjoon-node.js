@@ -42,8 +42,8 @@ https://www.acmicpc.net/problem/2903
 const fs = require("fs");
 const input = +fs.readFileSync("/dev/stdin").toString().trim();
 
-// 첫 줄 꼭짓점의 갯수 = 사각형의 갯수 + 1
-// 사각형의 갯수 = 2 ** n
+// 첫 줄 꼭짓점의 갯수 = 한 줄의 사각형의 갯수 + 1
+// 한 줄의 사각형의 갯수 = 2 ** n
 // 총 꼭짓점의 갯수 = 첫 줄 꼭짓점의 갯수 ** 2
 
 const result = (2 ** input + 1) ** 2;
