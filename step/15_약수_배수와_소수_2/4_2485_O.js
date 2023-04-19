@@ -52,13 +52,12 @@ const getGcd = (x, y) => {
 
 const dist = [];
 for (let i = 0; i < count - 1; i++) {
-  dist.push(input[i + 1] - input[0]);
+  dist.push(input[i + 1] - input[i]);
 }
 
 let gcd = input[count - 1];
 for (let i = 0; i < count - 2; i++) {
   let tempGcd = getGcd(dist[i + 1], dist[i]);
-
   if (tempGcd < gcd) gcd = tempGcd;
 }
 
@@ -67,8 +66,8 @@ for (let i = 0; i < count - 2; i++) {
 let output = 0;
 
 for (let i = 0; i < count - 1; i++) {
-  const tempDis = input[i + 1] - input[i];
-  // console.log(tempDis)
+  // const tempDis = input[i + 1] - input[i];
+  const tempDis = dist[i];
 
   if (tempDis !== gcd) {
     output += tempDis / gcd - 1;
