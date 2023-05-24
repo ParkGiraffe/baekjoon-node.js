@@ -1,11 +1,12 @@
 /*
-N과 M(1)
-https://www.acmicpc.net/problem/15649
+N과 M (2)
+https://www.acmicpc.net/problem/15650
 
 문제
 자연수 N과 M이 주어졌을 때, 아래 조건을 만족하는 길이가 M인 수열을 모두 구하는 프로그램을 작성하시오.
 
 1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열
+고른 수열은 오름차순이어야 한다.
 입력
 첫째 줄에 자연수 N과 M이 주어진다. (1 ≤ M ≤ N ≤ 8)
 
@@ -26,42 +27,13 @@ https://www.acmicpc.net/problem/15649
 1 2
 1 3
 1 4
-2 1
 2 3
 2 4
-3 1
-3 2
 3 4
-4 1
-4 2
-4 3
 예제 입력 3 
 4 4
 예제 출력 3 
 1 2 3 4
-1 2 4 3
-1 3 2 4
-1 3 4 2
-1 4 2 3
-1 4 3 2
-2 1 3 4
-2 1 4 3
-2 3 1 4
-2 3 4 1
-2 4 1 3
-2 4 3 1
-3 1 2 4
-3 1 4 2
-3 2 1 4
-3 2 4 1
-3 4 1 2
-3 4 2 1
-4 1 2 3
-4 1 3 2
-4 2 1 3
-4 2 3 1
-4 3 1 2
-4 3 2 1
 */
 
 const fs = require("fs");
@@ -73,29 +45,26 @@ const [n, m] = fs
   .map(Number);
 
 const exe = (n, m) => {
-  const seq = Array(m).fill(0);
+  // const seq = Array(m).fill(0);
   const visited = Array(n + 1).fill(false);
 
   let result = "";
 
-  const dfs = (k) => {
-    if (k === m) {
-      const arr = [];
-      for (let i = 0; i < m; i++) arr.push(seq[i]);
+  const dfs = (arr, k) => {
+    if (arr.length === m) {
       return (result += arr.join(" ") + "\n");
     }
 
-    for (let i = 1; i <= n; i++) {
-      if (!visited[i]) {
-        seq[k] = i;
-        visited[i] = true;
-        dfs(k + 1);
-        visited[i] = false;
-      }
+    for (let i = k + 1; i <= n; i++) {
+      arr.push(i);
+      // visited[i] = true;
+      dfs(arr, i);
+      // visited[i] = false;
+      arr.pop();
     }
   };
 
-  dfs(0);
+  dfs([], 0);
 
   return result;
 };
