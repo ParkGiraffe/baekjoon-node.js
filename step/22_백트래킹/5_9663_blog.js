@@ -2,6 +2,8 @@
 N-Queen
 https://www.acmicpc.net/problem/9663
 
+Ref : https://gamedoridori.tistory.com/176
+
 문제
 N-Queen 문제는 크기가 N × N인 체스판 위에 퀸 N개를 서로 공격할 수 없게 놓는 문제이다.
 
