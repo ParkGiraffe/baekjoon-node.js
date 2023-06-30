@@ -69,38 +69,40 @@ BBBBBBBBBBBBBBBWWWWWWWW
 */
 
 const fs = require("fs");
-const [NnMnK, ...CHESS] = fs
-  .readFileSync("/dev/stdin")
-  .toString()
-  .trim()
-  .split("\n");
-const [n, m, k] = NnMnK.split(" ").map(Number);
-const chess = [];
-CHESS.forEach((e) => {
-  chess.push(e.split(""));
-});
+const [NnMnK, ...CHESS] = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+const [n, m, k]= NnMnK.split(' ').map(Number)
+const chess = []
+CHESS.forEach(e => {
+    chess.push(e.split(''));
+})
 
 const board = (color) => {
-  const pSum = Array.from(Array(n + 1), () => new Array(m + 1).fill(0));
-  let value;
-  // console.log(chess);
-  // console.log(pSum);
-
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < m; j++) {
-      // console.log(i , j)
-
-      if ((i + j) % 2 == 0) {
-        value = chess[i][j] !== color ? 1 : 0;
-      } else {
-        value = chess[i][j] === color ? 1 : 0;
-      }
-
-      pSum[i + 1][j + 1] = pSum[i][j + 1] + pSum[i + 1][j] - pSum[i][j] + value;
+    const pSum = Array.from(Array(n + 1), () => new Array(m + 1).fill(0));
+    let value;
+    let count = k * k;
+    // console.log(chess);
+    // console.log(pSum);
+    
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+            // console.log(i , j)
+            
+            if ((i + j) % 2 == 0) {
+                value = chess[i][j] !== color ? 1 : 0;
+            } else {
+                value = chess[i][j] === color ? 1 : 0;   
+            }
+            
+            pSum[i + 1][j + 1] = pSum[i][j + 1] + pSum[i + 1][j] - pSum[i][j] + value;
+        }
     }
-  }
+    
+    for (let i = 1; i <= n - k + 1; i++) {
+        for (let j = 1; j <= m - k + 1; j++) {a}
+    }
+    
+    // console.log(pSum);
+    return count;
+}
 
-  for (let i = 1; i <= n - k + 1; i++) {
-    for (let j = 1; j <= m - k + 1; i++) {}
-  }
-};
+console.log(Math.min(board('W'), board('B')));
