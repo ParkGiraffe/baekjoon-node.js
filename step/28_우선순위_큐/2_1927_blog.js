@@ -42,7 +42,7 @@ const [n, ...xs] = fs
   .split("\n")
   .map(Number);
 
-class MinHeap {
+class AbsHeap {
   constructor() {
     this.heap = [];
   }
@@ -60,7 +60,14 @@ class MinHeap {
     let currentIndex = this.heap.length - 1;
     while (currentIndex > 0) {
       const parentIndex = Math.floor((currentIndex - 1) / 2); // 부모 노드의 인덱스
-      if (this.heap[parentIndex] <= this.heap[currentIndex]) break; // 부모노드가 자식노드보다 크거나 같으면 종료
+      if (Math.abs(this.heap[parentIndex]) < Math.abs(this.heap[currentIndex]))
+        break; // 부모노드의 절대값이 자식노드의 절대값보다 작으면 종료
+      if (
+        Math.abs(this.heap[parentIndex]) ===
+          Math.abs(this.heap[currentIndex]) &&
+        this.heap[parentIndex] < this.heap[currentIndex]
+      )
+        break; // 절대값이 같을 경우, 부모노드의 실제값이 더 작을 때 종료
 
       // 그렇지 않다면, 부모노드와 자식노드의 값을 서로 변경
       [this.heap[currentIndex], this.heap[parentIndex]] = [
@@ -74,6 +81,7 @@ class MinHeap {
   }
 
   pop() {
+    // console.log(this.heap);
     if (this.heap.length === 1) return this.heap.pop();
     const min = this.heap[0]; // 최상위 노드 값 추출
     this.heap[0] = this.heap.pop(); // 가장 마지막 노드를 최상위 노드로 올림
@@ -87,9 +95,17 @@ class MinHeap {
     const length = this.heap.length;
     let minIndex = index;
 
-    // 왼쪽 노드가 존재하고, 왼쪽노드의 값이 maxIndex의 값보다 크면 maxIndex를 왼쪽 노드로 갱신
+    // 왼쪽 노드가 존재하고, 왼쪽노드의 절대값이 minIndex의 절대값보다 작으면 minIndex를 왼쪽 노드로 갱신
     if (
       leftNodeIndex < length &&
+      Math.abs(this.heap[leftNodeIndex]) < Math.abs(this.heap[minIndex])
+    ) {
+      minIndex = leftNodeIndex;
+    }
+
+    if (
+      leftNodeIndex < length &&
+      Math.abs(this.heap[leftNodeIndex]) === Math.abs(this.heap[minIndex]) &&
       this.heap[leftNodeIndex] < this.heap[minIndex]
     ) {
       minIndex = leftNodeIndex;
@@ -97,6 +113,14 @@ class MinHeap {
 
     if (
       rightNodeIndex < length &&
+      Math.abs(this.heap[rightNodeIndex]) < Math.abs(this.heap[minIndex])
+    ) {
+      minIndex = rightNodeIndex;
+    }
+
+    if (
+      rightNodeIndex < length &&
+      Math.abs(this.heap[rightNodeIndex]) === Math.abs(this.heap[minIndex]) &&
       this.heap[rightNodeIndex] < this.heap[minIndex]
     ) {
       minIndex = rightNodeIndex;
@@ -104,7 +128,7 @@ class MinHeap {
 
     // 현재 최상위 노드에 있는 값이 최대값이 아닐 경우
     if (minIndex !== index) {
-      // 실제로 찾은 maxIndex값에 위치한 노드를 최상위 노드로 올린다.ㄹ
+      // 실제로 찾은 minIndex값에 위치한 노드를 최상위 노드로 올린다.ㄹ
       [this.heap[index], this.heap[minIndex]] = [
         this.heap[minIndex],
         this.heap[index],
@@ -118,16 +142,16 @@ class MinHeap {
 
 let output = [];
 
-const minHeap = new MinHeap();
+const absHeap = new AbsHeap();
 xs.forEach((x) => {
   if (x === 0) {
-    if (!minHeap.empty()) {
-      output.push(minHeap.pop());
+    if (!absHeap.empty()) {
+      output.push(absHeap.pop());
     } else {
       output.push(0);
     }
   } else {
-    minHeap.insert(x);
+    absHeap.insert(x);
   }
 });
 
