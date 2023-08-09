@@ -35,7 +35,7 @@ https://www.acmicpc.net/problem/2485
 5
 
 */
-
+/*
 const fs = require("fs");
 const [count, ...strInput] = fs
   .readFileSync("/dev/stdin")
@@ -59,6 +59,49 @@ let gcd = input[count - 1];
 for (let i = 0; i < count - 2; i++) {
   let tempGcd = getGcd(dist[i + 1], dist[i]);
   if (tempGcd < gcd) gcd = tempGcd;
+}
+
+// console.log(gcd);
+
+let output = 0;
+
+for (let i = 0; i < count - 1; i++) {
+  // const tempDis = input[i + 1] - input[i];
+  const tempDis = dist[i];
+
+  if (tempDis !== gcd) {
+    output += tempDis / gcd - 1;
+  }
+}
+
+console.log(output);
+
+*/
+
+// 2023-8-9 문제 업데이트 및 재채점으로 코드 수정
+const fs = require("fs");
+const [count, ...strInput] = fs
+  .readFileSync("/dev/stdin")
+  .toString()
+  .trim()
+  .split("\n");
+const input = strInput.map(Number);
+
+const getGcd = (x, y) => {
+  // console.log(x, y)
+  if (y == 0) return x;
+  else return getGcd(y, x % y);
+};
+
+const dist = [];
+for (let i = 0; i < count - 1; i++) {
+  dist.push(input[i + 1] - input[i]);
+}
+
+let gcd = dist[0];
+for (let i = 1; i < dist.length; i++) {
+  if (gcd > dist[i]) gcd = getGcd(gcd, dist[i]);
+  else if (gcd < dist[i]) gcd = getGcd(dist[i], gcd);
 }
 
 // console.log(gcd);
