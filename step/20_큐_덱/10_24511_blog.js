@@ -122,7 +122,7 @@ for (let i = 0; i < n; i++) {
     if (struct[i] === 0) deque.push(data[i]) // 자료구조가 큐인 원소만 덱이 넣음
 }
 
-const resultDeq = input.concat(...deque);
+const resultDeq = input.concat(...deque); // 시간 단축을 위해, 그냥 input을 미리 합침.
 // console.log(resultDeq);
 
 for (let i = 0; i < m; i++) {

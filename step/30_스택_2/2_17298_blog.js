@@ -34,9 +34,10 @@ const a = As.split(" ").map(Number); // 5 7 7 7
 const stack = []; // 3
 
 for (let i = 0; i < n; i++) {
-  let stackTop = stack.at(-1);
+  let top = stack.at(-1);
   while (stack.length && a[top] < a[i]) {
     a[stack.pop()] = a[i];
+    top = stack.at(-1);
   }
   stack.push(i);
 }
