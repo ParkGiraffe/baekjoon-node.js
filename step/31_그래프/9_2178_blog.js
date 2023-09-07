@@ -1,3 +1,59 @@
+/*
+
+미로 탐색
+https://www.acmicpc.net/problem/2178
+
+문제
+N×M크기의 배열로 표현되는 미로가 있다.
+
+1	0	1	1	1	1
+1	0	1	0	1	0
+1	0	1	0	1	1
+1	1	1	0	1	1
+미로에서 1은 이동할 수 있는 칸을 나타내고, 0은 이동할 수 없는 칸을 나타낸다. 이러한 미로가 주어졌을 때, (1, 1)에서 출발하여 (N, M)의 위치로 이동할 때 지나야 하는 최소의 칸 수를 구하는 프로그램을 작성하시오. 한 칸에서 다른 칸으로 이동할 때, 서로 인접한 칸으로만 이동할 수 있다.
+
+위의 예에서는 15칸을 지나야 (N, M)의 위치로 이동할 수 있다. 칸을 셀 때에는 시작 위치와 도착 위치도 포함한다.
+
+입력
+첫째 줄에 두 정수 N, M(2 ≤ N, M ≤ 100)이 주어진다. 다음 N개의 줄에는 M개의 정수로 미로가 주어진다. 각각의 수들은 붙어서 입력으로 주어진다.
+
+출력
+첫째 줄에 지나야 하는 최소의 칸 수를 출력한다. 항상 도착위치로 이동할 수 있는 경우만 입력으로 주어진다.
+
+예제 입력 1 
+4 6
+101111
+101010
+101011
+111011
+예제 출력 1 
+15
+예제 입력 2 
+4 6
+110110
+110110
+111111
+111101
+예제 출력 2 
+9
+예제 입력 3 
+2 25
+1011101110111011101110111
+1110111011101110111011101
+예제 출력 3 
+38
+예제 입력 4 
+7 7
+1011111
+1110001
+1000001
+1000001
+1000001
+1000001
+1111111
+예제 출력 4 
+13
+*/
 const fs = require("fs");
 const [first, ...second] = fs
   .readFileSync("/dev/stdin")
@@ -5,75 +61,58 @@ const [first, ...second] = fs
   .trim()
   .split("\n");
 
-const t = +first;
+const [n, m] = first.split(" ").map(Number);
+const maze = [];
+second.forEach((e) => {
+  maze.push(e.split("").map(Number));
+});
+
 const dx = [1, -1, 0, 0];
 const dy = [0, 0, 1, -1];
-let result = "";
+const visited = Array.from({ length: n }, () => Array(m).fill(0));
 
-// 테스트 케이스 당 배추흰지렁이 마리 수 구하기
-for (let tCase = 0; tCase < t; tCase++) {
-  const check = (y, x) => {
-    if (y >= 0 && y < n && x >= 0 && x < m) {
-      return true;
-    } else return false;
-  };
+const check = (y, x) => {
+  if (y >= 0 && y < n && x >= 0 && x < m) {
+    return true;
+  } else return false;
+};
 
-  // const dfs = (y, x) => {
-  //   if (check(y, x) && farm[y][x]) {
-  //     farm[y][x] = 0;
+const bfs = () => {
+  const bfsDeq = []; // 덱
+  let count = 1;
+  let y = 0;
+  let x = 0;
+  bfsDeq.push([y, x]); // y, x, 횟수
+  //   maze[y][x] = 0;
+  visited[0][0] = 1;
 
-  //     for (let i = 0; i < 4; i++) {
-  //       let newY = y + dy[i];
-  //       let newX = x + dx[i];
-  //       dfs(newY, newX);
-  //     }
-  //   }
-  // };
+  while (bfsDeq.length !== 0) {
+    let u = bfsDeq.shift();
+    // let isUpCount = false;
+    // console.log(u)
+    for (let i = 0; i < 4; i++) {
+      let newY = u[0] + dy[i];
+      let newX = u[1] + dx[i];
 
-  const bfs = (n) => {
-    const bfsDeq = []; // 덱
-    bfsDeq.push(n);
-    bfsVisited[n] = 1;
-  
-    while (bfsDeq.length !== 0) {
-      //   console.log(bfsDeq);
-      let u = bfsDeq.shift();
-  
-      graph.get(u).forEach((i) => {
-        if (!bfsVisited[i]) {
-          bfsDeq.push(i);
-          bfsVisited[i] = bfsCount;
-          bfsCount++;
-        }
-      });
-    }
-  };
+      //   if (newY === n - 1 && newX === m - 1) result.push(count + 1);
 
-  // M : 가로
-  // N : 세로
-  // K : 배추 (위치) 개수
-  const [m, n, k] = second.shift().split(" ").map(Number);
-  //   const farm = new Array(n).fill(new Array(m).fill(0)); <- 오류가 발생하는 방식
-  const farm = Array.from({ length: n }, () => Array(m).fill(0));
-  let count = 0;
-
-  // 배추 위치 표시
-  for (let i = 0; i < k; i++) {
-    const [x, y] = second.shift().split(" ").map(Number);
-    farm[y][x] = 1;
-  }
-  // console.log(farm)
-
-  // dfs로 접근
-  for (let y = 0; y < n; y++) {
-    for (let x = 0; x < m; x++) {
-      if (farm[y][x]) {
-        dfs(y, x);
-        count++;
+      if (check(newY, newX) && maze[newY][newX] && !visited[newY][newX]) {
+        visited[newY][newX] = visited[u[0]][u[1]] + 1;
+        bfsDeq.push([newY, newX]);
+        // isUpCount = true;
       }
     }
-  }
-  result += count + "\n";
-}
 
-console.log(result);
+    // if (isUpCount) count++;
+    // console.log(bfsDeq)
+  }
+};
+
+// const visited = Array.from({ length: n }, () => Array(m).fill(0));
+
+bfs();
+
+console.log(visited[n - 1][m - 1]);
+// result += count + "\n";
+
+// console.log(Math.min(...result));
