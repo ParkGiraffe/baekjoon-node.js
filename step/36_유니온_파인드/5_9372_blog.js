@@ -11,7 +11,6 @@ let output = [];
 
 for (let t = 0; t < tCount; t++) {
   const [n, m] = second[cursor++].split(" ").map(Number);
-  //   console.log(n, m);
   output.push(n - 1);
   cursor += m;
 }
