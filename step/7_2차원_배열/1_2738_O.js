@@ -1,7 +1,7 @@
 /*
 행렬 덧셈
 
-https://www.acmicpc.net/problem/2738
+https://www.acmicpc.net/problem/2godf738
 
 문제
 N*M크기의 두 행렬 A와 B가 주어졌을 때, 두 행렬을 더하는 프로그램을 작성하시오.
@@ -34,11 +34,11 @@ const [size, ...matrices] = fs
   .toString()
   .trim()
   .split("\n");
-let result = "";
-
 const [n, m] = size.split(" ").map((e) => +e);
+
 const firstMatrix = [];
 const secondMatrix = [];
+let result = "";
 
 for (let i = 0; i < matrices.length; i++) {
   if (i < n) {
