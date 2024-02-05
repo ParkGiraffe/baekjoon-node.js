@@ -32,7 +32,6 @@ https://www.acmicpc.net/problem/1011
 
 */
 
-
 /*
 https://nyang-in.tistory.com/177
 
@@ -135,7 +134,6 @@ N의 범위에 따라 길이가 일정한 것을 확인할 수 있다
 ...
 
 */
-
 
 const fs = require("fs");
 const [T, ...INPUTS] = fs
