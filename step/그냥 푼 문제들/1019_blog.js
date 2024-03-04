@@ -33,10 +33,9 @@ https://www.acmicpc.net/problem/1019
 543212345
 예제 출력 5 
 429904664 541008121 540917467 540117067 533117017 473117011 429904664 429904664 429904664 429904664
-
-
-
 */
+
+
 const fs = require("fs");
 let n = +fs.readFileSync("/dev/stdin").toString().trim();
 
