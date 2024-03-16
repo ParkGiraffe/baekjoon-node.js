@@ -60,5 +60,5 @@ const getRealMinute = (wrongMinute) => {
   if (wrongMinute === 30) return 15;
   if (wrongMinute > 30) return (wrongMinute * 3) / 2 - 30;
 };
-
+ㅎ
 console.log(getRealMinute(curMinute).toFixed(1));
