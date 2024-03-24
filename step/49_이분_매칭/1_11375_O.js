@@ -70,7 +70,7 @@ const dfs = (v1) => {
 for (let i = 1; i <= N; i++) {
   visited.fill(false); // 매번 방문여부를 초기화해야 함.
   if (dfs(i)) count++;
-  if (count === N) break; // 이미 n명 모두 일을 할당받으면, 더 이상 탐색할 필요가 없다
+  // if (count === N) break; // 이미 n명 모두 일을 할당받으면, 더 이상 탐색할 필요가 없다
 }
 
 // console.log(match);
