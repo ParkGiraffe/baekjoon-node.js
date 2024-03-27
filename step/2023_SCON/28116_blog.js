@@ -109,22 +109,22 @@ const [first, second] = fs
 
 const N = +first;
 const A = second.split(" ").map(Number);
-const Acount = new Array(N).fill(0);
-const numInfo = new Array(N);
+const count = new Array(N).fill(0);
+const numIdx = new Array(N);
 
 // const change = (i, j) => {
 //   const temp = A[i];
 //   A[i] = A[j];
 //   A[j] = temp;
 
-//   const countTemp = Acount[i];
-//   Acount[i] = Acount[j];
-//   Acount[j] = countTemp;
+//   const countTemp = count[i];
+//   count[i] = count[j];
+//   count[j] = countTemp;
 
 //   const difference = Math.abs(j - i);
 
-//   Acount[i] += difference;
-//   Acount[j] += difference;
+//   count[i] += difference;
+//   count[j] += difference;
 // };
 
 // for (let i = 0; i < N - 1; i++) {
@@ -135,7 +135,7 @@ const numInfo = new Array(N);
 //   }
 
 //   change(i, minIdx);
-//   // console.log(Acount);
+//   // console.log(count);
 // }
 
 // let num = 1;
@@ -145,27 +145,27 @@ const numInfo = new Array(N);
 //     change(i, location);
 //   }
 //   num++;
-//   // console.log(A, Acount);
+//   // console.log(A, count);
 // }
 
 for (let i = 0; i < N; i++) {
-  numInfo[A[i] - 1] = i; // 특정 숫자가 몇 번 인덱스에 있는 지를 저장.
+  numIdx[A[i] - 1] = i; // 특정 숫자가 몇 번 인덱스에 있는 지를 저장.
 }
 
 for (let i = 0; i < N; i++) {
   if (A[i] === i + 1) continue;
 
-  const targetIndex = numInfo[i];
+  const targetIndex = numIdx[i];
 
-  Acount[A[i] - 1] += targetIndex - i;
-  Acount[i] += targetIndex - i;
+  count[A[i] - 1] += targetIndex - i;
+  count[i] += targetIndex - i;
 
-  numInfo[i] = i;
-  numInfo[A[i] - 1] = targetIndex;
+  numIdx[i] = i;
+  numIdx[A[i] - 1] = targetIndex;
 
   A[targetIndex] = A[i];
   A[i] = i;
 }
 
 // console.log(A);
-console.log(Acount.join(" "));
+console.log(count.join(" "));
