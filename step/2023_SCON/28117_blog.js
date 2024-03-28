@@ -2,9 +2,7 @@
 prlong longf
 https://www.acmicpc.net/problem/28117
 
-prlong longf 성공
-시간 제한	메모리 제한	제출	정답	맞힌 사람	정답 비율
-2 초 (추가 시간 없음)	1024 MB (추가 메모리 없음)	366	165	149	49.338%
+prlong longf
 문제
 성서는 Bronze 5 난이도의 문제를 풀다가 틀렸습니다를 받았다.
 
