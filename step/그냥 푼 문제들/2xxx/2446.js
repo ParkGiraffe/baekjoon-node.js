@@ -1,6 +1,6 @@
 /*
-별 찍기 - 8
-https://www.acmicpc.net/problem/2445
+별 찍기 - 9
+https://www.acmicpc.net/problem/2446
 
 문제
 예제를 보고 규칙을 유추한 뒤에 별을 찍어 보세요.
@@ -14,56 +14,68 @@ https://www.acmicpc.net/problem/2445
 예제 입력 1 
 5
 예제 출력 1 
-*        *
-**      **
-***    ***
-****  ****
-**********
-****  ****
-***    ***
-**      **
-*        *
+*********
+ *******
+  *****
+   ***
+    *
+   ***
+  *****
+ *******
+*********
+
 */
 const fs = require("fs");
 const N = +fs.readFileSync("/dev/stdin").toString().trim();
 
 const output = [];
 
-for (let i = 1; i <= N; i++) {
+for (let i = 0; i < N; i++) {
   const temp = [];
 
   for (let j = 0; j < i; j++) {
-    temp.push("*");
-  }
-
-  for (let j = 0; j < 2 * (N - i); j++) {
     temp.push(" ");
   }
 
-  for (let j = 0; j < i; j++) {
+  for (let j = 0; j < N - i - 1; j++) {
     temp.push("*");
   }
+
+  temp.push("*");
+
+  for (let j = 0; j < N - i - 1; j++) {
+    temp.push("*");
+  }
+
+  // for (let j = 0; j < i; j++) {
+  //   temp.push(" ");
+  // }
 
   output.push(temp.join(""));
 }
 
-for (let i = N - 1; i >= 1; i--) {
+for (let i = N - 2; i >= 0; i--) {
   const temp = [];
 
   for (let j = 0; j < i; j++) {
-    temp.push("*");
-  }
-
-  for (let j = 0; j < 2 * (N - i); j++) {
     temp.push(" ");
   }
 
-  for (let j = 0; j < i; j++) {
+  for (let j = 0; j < N - i - 1; j++) {
     temp.push("*");
   }
+
+  temp.push("*");
+
+  for (let j = 0; j < N - i - 1; j++) {
+    temp.push("*");
+  }
+
+  // for (let j = 0; j < i; j++) {
+  //   temp.push(" ");
+  // }
 
   output.push(temp.join(""));
 }
 
 console.log(output.join("\n"));
-
